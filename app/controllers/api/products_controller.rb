@@ -5,6 +5,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def todo
+    @products = Product.all
     render 'all.json.jb'
   end
 end
