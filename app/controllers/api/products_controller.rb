@@ -3,4 +3,8 @@ class Api::ProductsController < ApplicationController
     @product = Product.first
     render 'product.json.jb'
   end
+
+  def todo
+    render 'all.json.jb'
+  end
 end
