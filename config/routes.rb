@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   # end
   namespace :api do 
     get "/product_path" => "products#all_products"
+    
   end
 end
