@@ -1,12 +1,12 @@
 class Api::ProductsController < ApplicationController
-  def primero
+  def show
     the_id = params[:id]
     @product = Product.find_by(id: the_id)
-    render 'first.json.jb'
+    render 'show.json.jb'
   end
 
-  def todo
+  def index
     @products = Product.all
-    render 'all.json.jb'
+    render 'index.json.jb'
   end
 end
