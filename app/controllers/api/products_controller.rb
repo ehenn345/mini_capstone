@@ -9,4 +9,16 @@ class Api::ProductsController < ApplicationController
     @products = Product.all
     render 'index.json.jb'
   end
+  
+  def create
+    @product = Product.new(
+      name: params[:name],
+      price: params[:price],
+      description: params[:description],
+      id: params[:id],
+      image_url: params[:image]
+    )
+    render 'show.json.jb'
+  end
+
 end
