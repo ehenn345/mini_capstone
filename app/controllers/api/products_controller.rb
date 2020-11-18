@@ -6,7 +6,11 @@ class Api::ProductsController < ApplicationController
   end
 
   def index
-    @product = Product.all
+    if params[:search]
+      @products = Product.where("name ILIKE ?", "%params[:search]%'")
+    else
+      @products = Product.all  
+    end
     render 'index.json.jb'
   end
   
@@ -16,9 +20,14 @@ class Api::ProductsController < ApplicationController
       price: params[:price],
       description: params[:description],
       id: params[:id],
-      image_url: params[:image]
+      image_url: params[:image],
+      inventory: params[:inventory]
     )
-    render 'show.json.jb'
+    if @product.save
+      render 'show.json.jb'
+    else
+      render json: {errors: @product.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -28,9 +37,13 @@ class Api::ProductsController < ApplicationController
     @product.price = params[:price]
     @product.image_url = params[:image]
     @product.description = params[:description]
+    @product.inventory = params[:inventory]
     
-    @product.save
-    render 'show.json.jb'
+    if @product.save
+      render 'show.json.jb'
+    else 
+      render json: {errors: @product.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def destroy
