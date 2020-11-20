@@ -4,9 +4,11 @@
   tax: number_to_currency(product.tax),
   is_discounted: product.is_discounted?,
   description: product.description,
-  image_url: product.image_url,
   name: product.name,
   total: number_to_currency(product.total),
   inventory: product.inventory,
-  supplier: product.supplier.name
+  supplier: product.supplier.name,
+  # url: image.url,
+  images: product.images,
+  # current_user: user.current_user
 }
