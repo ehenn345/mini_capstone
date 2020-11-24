@@ -1,4 +1,6 @@
 class Api::ProductsController < ApplicationController
+  before_action :authenticate_user, only: [:create, :show]
+
   def show
     the_id = params[:id]
     @product = Product.find_by(id: the_id)
@@ -21,7 +23,7 @@ class Api::ProductsController < ApplicationController
       price: params[:price],
       description: params[:description],
       id: params[:id],
-      image_url: params[:image],
+      # image_url: params[:image],
       inventory: params[:inventory]
     )
     if @product.save
@@ -36,7 +38,7 @@ class Api::ProductsController < ApplicationController
     @product.id = params[:id]
     @product.name = params[:name]
     @product.price = params[:price]
-    @product.image_url = params[:image]
+    # @product.image_url = params[:image]
     @product.description = params[:description]
     @product.inventory = params[:inventory]
     
